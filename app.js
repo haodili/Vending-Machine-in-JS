@@ -1,22 +1,26 @@
 function app() {
     //define the goods properties
     var products = {
-        Pepsi: {
+        pepsi: {
+            id: 1,
             name: 'Pepsi',
             cost: 150,
             amount: 50
         },
-        MtnDew: {
+        mtnDew: {
+            id: 2,
             name: 'MtnDew',
             cost: 150,
             amount: 40
         },
-        Cheetos: {
+        cheetos: {
+            id: 3,
             name: 'Cheetos',
             cost: 100,
             amount: 30
         },
-        LaysChips: {
+        laysChips: {
+            id: 4,
             name: 'LaysChips',
             cost: 100,
             amount: 2
@@ -25,19 +29,19 @@ function app() {
 
     //define the initial money stored in the vending machine
     var money = {
-        Nickel: {
+        nickel: {
             name: '5cent',
             amount: 100
         },
-        Dime: {
+        dime: {
             name: '10cent',
             amount: 50
         },
-        Quarter: {
+        quarter: {
             name: '25cent',
             amount: 100
         },
-        Dollar: {
+        dollar: {
             name: '100cent',
             amount: 50
         }
@@ -46,23 +50,23 @@ function app() {
     serviceFlag = true;
 
     while (serviceFlag) {
-        if (products.Pepsi.amount <= 1 || 　products.MtnDew.amount <= 1 || products.Cheetos.amount <= 1 || products.LaysChips.amount <= 1 || money.Nickel.amount <= 1 || money.Dime.amount <= 1 || money.Quarter.amount <= 1 || money.Dollar.amount <= 1) {
+        if (products.pepsi.amount <= 1 || 　products.mtnDew.amount <= 1 || products.cheetos.amount <= 1 || products.laysChips.amount <= 1 || money.nickel.amount <= 1 || money.dime.amount <= 1 || money.quarter.amount <= 1 || money.dollar.amount <= 1) {
             serviceFlag = false;
         }
-        Buy()
         //start a purchase
-        function Buy() {
-            selection()
-        }
+        selection()
+
         //select the product you want to buy
         function selection() {
             selectionFlag = false;
-            alert("Welcome to our vending machine,  \n Pepsi: " + products.Pepsi.cost + " cents ,MtnDew: " + products.MtnDew.cost + " cents ,Cheetos: " + products.Cheetos.cost + " cents,LaysChips:" + products.LaysChips.cost + " cents; \n click OK for select product")
+            alert("Welcome to our vending machine,  \n Pepsi: " + products.pepsi.cost + " cents ,MtnDew: " + products.mtnDew.cost + " cents ,Cheetos: " + products.cheetos.cost + " cents,LaysChips:" + products.laysChips.cost + " cents; \n click OK for select product")
             while (!selectionFlag) {
                 var selection = prompt("type 1 for Pepsi, type 2 for MtnDew,type 3 for Cheetos, type 4 for Layschips")
                 var selectionInt = parseInt(selection);
-                if (selectionInt == 1 || selectionInt == 2 || selectionInt == 3 || selectionInt == 4) {
+                if (selectionInt === 1 || selectionInt === 2 || selectionInt === 3 || selectionInt === 4) {
                     selectionFlag = true
+                } else {
+                    alert("Please ensure type 1-4 for product selection!")
                 }
             }
             payment(selectionInt);
@@ -72,30 +76,30 @@ function app() {
         //pay for the product and get change back
         function payment(choice) {
             var totalInserted = 0;
-            if (choice == 1) {
-                var price = products.Pepsi.cost;
-                var name = products.Pepsi.name;
-                products.Pepsi.amount--;
+            if (choice === 1) {
+                var price = products.pepsi.cost;
+                var name = products.pepsi.name;
+                products.pepsi.amount--;
             }
-            if (choice == 2) {
-                var price = products.MtnDew.cost;
-                var name = products.MtnDew.name;
-                products.MtnDew.amount--;
+            if (choice === 2) {
+                var price = products.mtnDew.cost;
+                var name = products.mtnDew.name;
+                products.mtnDew.amount--;
             }
-            if (choice == 3) {
-                var price = products.Cheetos.cost;
-                var name = products.Cheetos.name;
-                products.Cheetos.amount--;
+            if (choice === 3) {
+                var price = products.cheetos.cost;
+                var name = products.cheetos.name;
+                products.cheetos.amount--;
             }
-            if (choice == 4) {
-                var price = products.LaysChips.cost;
-                var name = products.LaysChips.name;
-                products.LaysChips.amount--;
+            if (choice === 4) {
+                var price = products.laysChips.cost;
+                var name = products.laysChips.name;
+                products.laysChips.amount--;
             }
-            while (totalInserted < price) {
+             while (totalInserted < price) {
                 var added = prompt("for payment, please insert coins,only Dime(10),Quarter(25) and one dollar(100) are accepted");
                 var intAdded = parseInt(added);
-                if (intAdded == 10 || intAdded == 25 || intAdded == 100) {
+                if (intAdded === 10 || intAdded === 25 || intAdded === 100) {
                     console.log(intAdded);
                     totalInserted += intAdded;
                     moneyCount(intAdded, 1);
@@ -108,62 +112,61 @@ function app() {
             var change = totalInserted - price;
             moneyCount(change, -1)
             alert("Enjoy your " + name + " and your change is " + change)
+        
         }
         //account the money
         function moneyCount(count, flag) {
-            if (count == 10 && flag == 1) {
-                money.Dime.amount++;
+            if (count === 10 && flag === 1) {
+                money.dime.amount++;
             }
-            if (count == 25 && flag == 1) {
-                money.Quarter.amount++;
+            if (count === 25 && flag === 1) {
+                money.quarter.amount++;
             }
-            if (count == 100 && flag == 1) {
-                money.Dollar.amount++;
+            if (count === 100 && flag === 1) {
+                money.dollar.amount++;
             }
-            if (flag == -1) {
-                if (count == 50) {
-                    money.Quarter.amount--;
-                    money.Quarter.amount--;
+            if (flag === -1) {
+                if (count === 50) {
+                    money.quarter.amount--;
+                    money.quarter.amount--;
                 }
-                if(count == 45) {
-                    money.Dime.amount--;
-                    money.Dime.amount--;
-                    money.Quarter.amount--;
+                if (count === 45) {
+                    money.dime.amount--;
+                    money.dime.amount--;
+                    money.quarter.amount--;
                 }
-                if (count == 35) {
-                    money.Quarter.amount--;
-                    money.Dime.amount--;
+                if (count === 35) {
+                    money.quarter.amount--;
+                    money.dime.amount--;
                 }
-                if (count == 30) {
-                    money.Dime.amount--;
-                    money.Dime.amount--;
-                    money.Dime.amount--;
+                if (count === 30) {
+                    money.dime.amount--;
+                    money.dime.amount--;
+                    money.dime.amount--;
                 }
-                if (count == 25) {
-                    money.Quarter.amount--;
+                if (count === 25) {
+                    money.quarter.amount--;
                 }
-                if (count == 20) {
-                    money.Dime.amount--;
-                    money.Dime.amount--;
+                if (count === 20) {
+                    money.dime.amount--;
+                    money.dime.amount--;
                 }
-                if (count == 15) {
-                    money.Dime.amount--;
-                    money.Nickel.amount--;
+                if (count === 15) {
+                    money.dime.amount--;
+                    money.nickel.amount--;
                 }
-                if (count == 10) {
-                    money.Dime.amount--;
+                if (count === 10) {
+                    money.dime.amount--;
                 }
-                if (count == 5) {
-                    money.Nickel.amount--;
+                if (count === 5) {
+                    money.nickel.amount--;
                 }
             }
         }
-        var earned = (money.Dime.amount) * 10 + (money.Quarter.amount) * 25 + (money.Dollar.amount) * 100
+        var earned = (money.dime.amount) * 10 + (money.quarter.amount) * 25 + (money.dollar.amount) * 100
         console.log("the money in machine is " + earned + " cents")
-        console.log("Pepsi left:" + products.Pepsi.amount + ", Mtndew left:" + products.MtnDew.amount + ", Cheetos left:" + products.Cheetos.amount + ", LaysChips left:" + products.LaysChips.amount)
+        console.log("Pepsi left:" + products.pepsi.amount + ", Mtndew left:" + products.mtnDew.amount + ", Cheetos left:" + products.cheetos.amount + ", LaysChips left:" + products.laysChips.amount)
     }
     console.log("Under maintenance, sorry for the inconvenience")
-
 }
-
 app()
