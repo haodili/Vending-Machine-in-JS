@@ -76,26 +76,10 @@ function app() {
         //pay for the product and get change back
         function payment(choice) {
             var totalInserted = 0;
-            if (choice === 1) {
-                var price = products.pepsi.cost;
-                var name = products.pepsi.name;
-                products.pepsi.amount--;
-            }
-            if (choice === 2) {
-                var price = products.mtnDew.cost;
-                var name = products.mtnDew.name;
-                products.mtnDew.amount--;
-            }
-            if (choice === 3) {
-                var price = products.cheetos.cost;
-                var name = products.cheetos.name;
-                products.cheetos.amount--;
-            }
-            if (choice === 4) {
-                var price = products.laysChips.cost;
-                var name = products.laysChips.name;
-                products.laysChips.amount--;
-            }
+            var productIndex = choice - 1;
+            var price = products[Object.keys(products)[productIndex]].cost;
+            var name = products[Object.keys(products)[productIndex]].name;
+            products[Object.keys(products)[productIndex]].amount--;
              while (totalInserted < price) {
                 var added = prompt("for payment, please insert coins,only Dime(10),Quarter(25) and one dollar(100) are accepted");
                 var intAdded = parseInt(added);
